@@ -3,6 +3,7 @@ import { CiHome } from "react-icons/ci";
 import { CiHashtag } from "react-icons/ci";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { CiUser } from "react-icons/ci";
+import { CiBookmark } from "react-icons/ci";
 import { AiOutlineLogout } from "react-icons/ai";
 function LeftSideBar() {
   return (
@@ -48,6 +49,13 @@ function LeftSideBar() {
                 <CiUser size="24px" />
             </div>
             <h1 className="font-bold text-lg ml-2">Profile</h1>
+          </div>
+
+          <div className='flex items-center my-2 px-4 py-2 hover:bg-gray-200 hover:cursor-pointer rounded-full'>
+                        <div>
+                            <CiBookmark size="24px" />
+                        </div>
+                        <h1 className='font-bold text-lg ml-2'>Bookmarks</h1>
           </div>
 
           <div className="flex items-center my-2 px-4 py-2 hover:bg-gray-200 hover:cursor-pointer rounded-full">
