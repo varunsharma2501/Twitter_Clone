@@ -1,6 +1,6 @@
 import axios from "axios";
 import toast from "react-hot-toast";
-import { AUTH_API_END_POINT } from "../utils/const";
+import { AUTH_API_END_POINT } from "../utils/const.js";
 import { useNavigate } from "react-router-dom";
 
 const useSignup = () =>
@@ -13,6 +13,7 @@ const useSignup = () =>
       // signup
       const success = handleInputErrors({ fullname, username, password, confirmPassword, email });
       if (!success) return;
+
 
       try {
         const res = await axios.post(`${AUTH_API_END_POINT}/signup`, { fullname, username, email, password, confirmPassword }, {
