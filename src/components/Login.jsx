@@ -1,10 +1,15 @@
 import React,{useState} from 'react'
+import useLogin from '../hooks/useLogin';
+import { Link } from 'react-router-dom';
 
-function Login() {
+const Login=()=>{
+  const [username,setUsername]=useState('');
+  const [password,setPassword]=useState('');
+  const {login} = useLogin();
 
-  const [isLogin,setIsLogin]=useState();
-  const loginSignupHandler = () => {
-    setIsLogin(!isLogin);
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    await login({ username,password});
   }
 
   return (
@@ -17,19 +22,13 @@ function Login() {
           <div className='my-5'>
             <h1 className='font-bold text-6xl'>Happening now.</h1>
           </div>
-          <h1 className='mt-4 mb-2 text-2xl font-bold'>{isLogin ? "Login" : "Signup"}</h1>
-          <form  className='flex flex-col w-[80%]'>
-            {
-              !isLogin && (<>
-                <input type="text"  placeholder='Name' className="outline-blue-500 border border-gray-800 px-3 py-2 rounded-full my-1 font-semibold" />
-                <input type="text"  placeholder='Username' className="outline-blue-500 border border-gray-800 px-3 py-2 rounded-full my-1 font-semibold" />
-              </>)
-            }
-            <input type="email"  placeholder='Email' className="outline-blue-500 border border-gray-800 px-3 py-2 rounded-full my-1 font-semibold" />
-            <input type="password"  placeholder='Password' className="outline-blue-500 border border-gray-800 px-3 py-2 rounded-full my-1 font-semibold" />
-            <input type="password"  placeholder='Confirm Password' className="outline-blue-500 border border-gray-800 px-3 py-2 rounded-full my-1 font-semibold" />
-            <button className='bg-[#1D9BF0] border-none py-2 my-4 rounded-full text-lg text-white'>{isLogin ? "Login" : "Create Account"}</button>
-            <h1>{isLogin ? "Do not have an account?" : "Already have an account?"} <span onClick={loginSignupHandler} className='font-bold text-blue-600 cursor-pointer'>{isLogin ? "Signup" : "Login"}</span></h1>
+          <h1 className='mt-4 mb-2 text-2xl font-bold'>Login</h1>
+          <form  onSubmit={submitHandler} className='flex flex-col w-[80%]'>
+          
+            <input type="text" value={username} onChange={(e)=>setUsername(e.target.value)} placeholder='Username' className="outline-blue-500 border border-gray-800 px-3 py-2 rounded-full my-1 font-semibold" />
+            <input type="password" value={password} onChange={(e)=>setPassword(e.target.value)} placeholder='Password' className="outline-blue-500 border border-gray-800 px-3 py-2 rounded-full my-1 font-semibold" />
+            <button className='bg-[#1D9BF0] border-none py-2 my-4 rounded-full text-lg text-white'>Login</button>
+            <h1>Do not have an account?<Link to="/signup" className='font-bold text-blue-600 cursor-pointer'>SignUp</Link></h1>
           </form>
         </div>
       </div>
