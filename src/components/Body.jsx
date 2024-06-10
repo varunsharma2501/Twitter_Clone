@@ -15,7 +15,7 @@ const Body=()=>{
                 path:"",
                 element:<Feed/>
             },{
-                path:"profile",
+                path:"/profile/:id",
                 element:<Profile/>
             }
             ]
@@ -27,7 +27,7 @@ const Body=()=>{
         {
             path:"/signup",
             element:<SignUp/>
-        }
+        },
     ])
 
     return(

@@ -2,11 +2,13 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { AUTH_API_END_POINT } from "../utils/const.js";
 import { useNavigate } from "react-router-dom";
+import {useDispatch} from 'react-redux'
+import { getUser } from "../redux/userSlice";
 
 const useSignup = () =>
 {
   const navigate = useNavigate();
-
+  const dispatch=useDispatch();
   const signup = async ({ fullname, username, email, password, confirmPassword }) => {
     console.log("Fields received for validation:", { fullname, username, email, password, confirmPassword });
 
@@ -22,6 +24,9 @@ const useSignup = () =>
           },
           withCredentials: true
         });
+
+        dispatch(getUser(res?.data?.user));
+
         if (res.status === 201) {
           console.log("want to navigate");
           navigate("/");

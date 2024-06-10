@@ -2,11 +2,13 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { AUTH_API_END_POINT } from "../utils/const";
 import { useNavigate } from "react-router-dom";
+import {useDispatch} from 'react-redux'
+import { getUser } from "../redux/userSlice";
 
 const useLogin = () =>
 {
   const navigate = useNavigate();
-
+  const dispatch=useDispatch();
   const login = async ({ username,password}) => {
     console.log("log 1")
 
@@ -23,6 +25,7 @@ const useLogin = () =>
           withCredentials: true
         });
 
+        dispatch(getUser(res?.data?.user));
         if (res.status === 200) {
           console.log("want to navigate");
           navigate("/");

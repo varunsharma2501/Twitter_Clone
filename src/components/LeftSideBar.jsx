@@ -5,7 +5,12 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 import { CiUser } from "react-icons/ci";
 import { CiBookmark } from "react-icons/ci";
 import { AiOutlineLogout } from "react-icons/ai";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 function LeftSideBar() {
+  const user = useSelector(state => state.user.user);
+
   return (
     <div className="w-[20%]">
       <div>
@@ -24,10 +29,12 @@ function LeftSideBar() {
         <div className="my-4">
           
           <div className="flex items-center my-2 px-4 py-2 hover:bg-gray-200 hover:cursor-pointer rounded-full">
+            <Link to="/" className="flex items-center">
             <div>
               <CiHome size="24px" />
             </div>
             <h1 className="font-bold text-lg ml-2">Home</h1>
+            </Link>
           </div>
 
           <div className="flex items-center my-2 px-4 py-2 hover:bg-gray-200 hover:cursor-pointer rounded-full">
@@ -45,10 +52,12 @@ function LeftSideBar() {
           </div>
 
           <div className="flex items-center my-2 px-4 py-2 hover:bg-gray-200 hover:cursor-pointer rounded-full">
+            <Link to={`/profile/${user?._id}`} className="flex items-center">
             <div>
                 <CiUser size="24px" />
             </div>
             <h1 className="font-bold text-lg ml-2">Profile</h1>
+            </Link>
           </div>
 
           <div className='flex items-center my-2 px-4 py-2 hover:bg-gray-200 hover:cursor-pointer rounded-full'>

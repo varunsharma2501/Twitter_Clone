@@ -3,6 +3,7 @@ import { CiSearch } from "react-icons/ci";
 import Avatar from "react-avatar";
 
 function RightSideBar() {
+  
   return (
     <div className='w-[25%]'>
       {/* search component */}
