@@ -3,6 +3,10 @@ import React,{useState} from 'react'
 function Login() {
 
   const [isLogin,setIsLogin]=useState();
+  const loginSignupHandler = () => {
+    setIsLogin(!isLogin);
+  }
+
   return (
     <div className='w-screen h-screen flex items-center justify-center'>
       <div className='flex items-center justify-evenly w-[80%]'>
@@ -23,8 +27,9 @@ function Login() {
             }
             <input type="email"  placeholder='Email' className="outline-blue-500 border border-gray-800 px-3 py-2 rounded-full my-1 font-semibold" />
             <input type="password"  placeholder='Password' className="outline-blue-500 border border-gray-800 px-3 py-2 rounded-full my-1 font-semibold" />
+            <input type="password"  placeholder='Confirm Password' className="outline-blue-500 border border-gray-800 px-3 py-2 rounded-full my-1 font-semibold" />
             <button className='bg-[#1D9BF0] border-none py-2 my-4 rounded-full text-lg text-white'>{isLogin ? "Login" : "Create Account"}</button>
-            <h1>{isLogin ? "Do not have an account?" : "Already have an account?"} <span className='font-bold text-blue-600 cursor-pointer'>{isLogin ? "Signup" : "Login"}</span></h1>
+            <h1>{isLogin ? "Do not have an account?" : "Already have an account?"} <span onClick={loginSignupHandler} className='font-bold text-blue-600 cursor-pointer'>{isLogin ? "Signup" : "Login"}</span></h1>
           </form>
         </div>
       </div>
