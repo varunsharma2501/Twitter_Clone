@@ -2,51 +2,50 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { AUTH_API_END_POINT } from "../utils/const.js";
 import { useNavigate } from "react-router-dom";
-import {useDispatch} from 'react-redux'
+import { useDispatch } from 'react-redux';
 import { getUser } from "../redux/userSlice";
 
-const useSignup = () =>
-{
+const useSignup = () => {
   const navigate = useNavigate();
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
+
   const signup = async ({ fullname, username, email, password, confirmPassword }) => {
-    console.log("Fields received for validation:", { fullname, username, email, password, confirmPassword });
+    // Check for input errors
+    const success = handleInputErrors({ fullname, username, password, confirmPassword, email });
+    if (!success) return;
 
-      // signup
-      const success = handleInputErrors({ fullname, username, password, confirmPassword, email });
-      if (!success) return;
+    try {
+      // Make the API request
+      const response = await axios.post(`${AUTH_API_END_POINT}/signup`, { fullname, username, email, password, confirmPassword }, {
+        headers: {
+          'Content-Type': "application/json"
+        },
+        withCredentials: true
+      });
 
+      const data = response.data;
 
-      try {
-        const res = await axios.post(`${AUTH_API_END_POINT}/signup`, { fullname, username, email, password, confirmPassword }, {
-          headers: {
-            'Content-Type': "application/json"
-          },
-          withCredentials: true
-        });
-
-        dispatch(getUser(res?.data?.user));
-
-        if (res.status === 201) {
-          console.log("want to navigate");
-          navigate("/");
-          toast.success("Signup successful");
-        } else {
-          toast.error(res.data.error); // Display the error message from the backend
-        }
-      } catch (error) {
-        toast.error(res.error);
-        console.log(error);
+      if (data.error) {
+        throw new Error(data.error);
       }
+
+      if (response.status === 201) {
+        dispatch(getUser(data.user));
+        navigate("/");
+        toast.success("Signup successful");
+      } else {
+        toast.error(data.error); // Display the error message from the backend
+      }
+    } catch (error) {
+      toast.error(error.message || 'Signup failed');
+      console.log(error);
     }
+  }
 
   return { signup };
-  };
-
-
+};
 
 const handleInputErrors = ({ fullname, username, password, confirmPassword, email }) => {
-  console.log("Validating fields:", { fullname, username, password, confirmPassword, email });
   if (!fullname || !username || !password || !confirmPassword || !email) {
     toast.error("Please fill in all fields");
     return false;

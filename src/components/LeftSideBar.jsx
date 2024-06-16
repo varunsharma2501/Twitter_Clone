@@ -7,10 +7,11 @@ import { CiBookmark } from "react-icons/ci";
 import { AiOutlineLogout } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import useLogout from "../hooks/useLogout";
 
 function LeftSideBar() {
   const user = useSelector(state => state.user.user);
-
+  const handleLogout=useLogout();
   return (
     <div className="w-[20%]">
       <div>
@@ -67,7 +68,7 @@ function LeftSideBar() {
                         <h1 className='font-bold text-lg ml-2'>Bookmarks</h1>
           </div>
 
-          <div className="flex items-center my-2 px-4 py-2 hover:bg-gray-200 hover:cursor-pointer rounded-full">
+          <div className="flex items-center my-2 px-4 py-2 hover:bg-gray-200 hover:cursor-pointer rounded-full" onClick={handleLogout}>
             <div>
               <AiOutlineLogout size="24px" />
             </div>

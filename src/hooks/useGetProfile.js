@@ -9,6 +9,7 @@ const useGetProfile = (id) => {
     useEffect(()=>{
         const fetchMyProfile = async () => {
             try {
+                console.log("getProfile 1");
                 const res = await axios.get(`${USER_API_END_POINT}/profile/${id}`,{
                     withCredentials:true
                 });
@@ -21,4 +22,5 @@ const useGetProfile = (id) => {
         fetchMyProfile();
     },[id]);
 };
+
 export default useGetProfile;

@@ -1,40 +1,49 @@
-import React from 'react'
+import React from 'react';
 import Home from './Home';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Feed from './Feed';
 import Profile from './Profile';
 import Login from './Login';
 import SignUp from './Signup';
+import ProtectRoute from './ProtectRoute';
 
-const Body=()=>{
-    const appRouter=createBrowserRouter([
+const Body = () => {
+    const appRouter = createBrowserRouter([
         {
-            path:"/",
-            element:<Home/>,
-            children:[{
-                path:"",
-                element:<Feed/>
-            },{
-                path:"/profile/:id",
-                element:<Profile/>
-            }
+            path: "/",
+            element: <ProtectRoute />, // ProtectRoute is used here
+            children: [
+                {
+                    path: "",
+                    element: <Home />, // Home should be here as the main element
+                    children: [
+                        {
+                            path: "",
+                            element: <Feed />
+                        },
+                        {
+                            path: "profile/:id",
+                            element: <Profile />
+                        }
+                    ]
+                }
             ]
         },
         {
-            path:"/login",
-            element:<Login/>
+            path: "/login",
+            element: <Login />
         },
         {
-            path:"/signup",
-            element:<SignUp/>
+            path: "/signup",
+            element: <SignUp />
         },
-    ])
+    ]);
 
-    return(
+    return (
         <div>
-            <RouterProvider router={appRouter}/>
+            <RouterProvider router={appRouter} />
         </div>
-    )
+    );
 }
 
-export default Body
+export default Body;

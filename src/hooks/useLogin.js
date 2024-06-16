@@ -24,17 +24,22 @@ const useLogin = () =>
           },
           withCredentials: true
         });
+        
+      // const data = await res.json();
+			// if (data.error) {
+			// 	throw new Error(data.error);
+			// }
 
         dispatch(getUser(res?.data?.user));
         if (res.status === 200) {
-          console.log("want to navigate");
+          dispatch(getUser(res?.data?.user));
           navigate("/");
           toast.success("Login successful");
         } else {
           toast.error(res.data.error); // Display the error message from the backend
         }
       } catch (error) {
-        toast.error(res.error);
+        toast.error(error.message);
         console.log(error);
       }
     }

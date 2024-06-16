@@ -6,9 +6,11 @@ import { useSelector,useDispatch } from 'react-redux'
 import useGetProfile from '../hooks/useGetProfile'
 
 function Profile() {
-    const {user,profile}=useSelector(store=>store.user);
     const {id}=useParams();
     useGetProfile(id);
+    console.log("getProfile ",id);
+    const {profile}=useSelector(store=>store.user);
+    
     const dispatch = useDispatch();
 
 
