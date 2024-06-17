@@ -5,8 +5,9 @@ import { Outlet } from 'react-router-dom'
 import useOtherUsers from '../hooks/useOtherUsers'
 
 
+
 const Home=()=>{
-  // useOtherUsers();
+  useOtherUsers();
   return (
     <div className='flex justify-between w-[80%] mx-auto'>
       <LeftSideBar/>

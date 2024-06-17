@@ -6,6 +6,8 @@ import Profile from './Profile';
 import Login from './Login';
 import SignUp from './Signup';
 import ProtectRoute from './ProtectRoute';
+import FollowingTweets from './FollowingTweets';
+import AllTweets from './AllTweets';
 
 const Body = () => {
     const appRouter = createBrowserRouter([
@@ -19,7 +21,21 @@ const Body = () => {
                     children: [
                         {
                             path: "",
-                            element: <Feed />
+                            element: <Feed />,
+                            children:[
+                                {
+                                    path:"",
+                                    element:<FollowingTweets/>
+                                },
+                                {
+                                    path:"/followingTweets",
+                                    element:<FollowingTweets/>
+                                },
+                                {
+                                    path:"/allTweets",
+                                    element:<AllTweets/>
+                                }
+                            ]
                         },
                         {
                             path: "profile/:id",

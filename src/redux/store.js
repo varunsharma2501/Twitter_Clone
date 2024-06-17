@@ -1,5 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import userSlice from "./userSlice";
+import tweetSlice from "./tweetSlice";
 import {
   persistReducer,
   FLUSH,
@@ -19,7 +20,7 @@ const persistConfig = {
 };
 const rootReducer=combineReducers({
     user: userSlice,
-    // tweet:TweetSlice,
+    tweet:tweetSlice,
 })
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

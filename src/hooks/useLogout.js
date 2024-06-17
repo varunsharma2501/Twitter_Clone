@@ -12,7 +12,7 @@ const useLogout = () => {
             // const response = await axios.post(`${AUTH_API_END_POINT}/logout`);
             console.log("1 uselogout");
             const response = await axios({
-                method : 'post', 
+                method : 'put', 
                 url : `${AUTH_API_END_POINT}/logout`, 
                 withCredentials : true 
             })

@@ -4,18 +4,25 @@ import { Link, useParams } from 'react-router-dom';
 import Avatar from "react-avatar";
 import { useSelector,useDispatch } from 'react-redux'
 import useGetProfile from '../hooks/useGetProfile'
+import useGetMyTweets from '../hooks/useGetMyTweets';
+import Tweet from './Tweet';
 
 function Profile() {
     const {id}=useParams();
     useGetProfile(id);
+    useGetMyTweets();
     console.log("getProfile ",id);
     const {profile}=useSelector(store=>store.user);
-    
-    const dispatch = useDispatch();
+    const {myTweets}=useSelector(store=>store.tweet);
+    // const dispatch = useDispatch();
 
 
   return (
+    <>
+
+
     <div className='w-[50%] border-l border-r border-gray-200'>
+
     <div>
         <div className='flex items-center py-2'>
             <Link to="/" className='p-2 rounded-full hover:bg-gray-100 hover:cursor-pointer'>
@@ -41,7 +48,16 @@ function Profile() {
             <p>{profile?.bio}</p>
         </div>
     </div>
-</div>
+
+    <div>
+       {myTweets && myTweets.map((tweet) => (
+            <Tweet key={tweet._id} tweet={tweet} />
+        ))}
+    </div>
+    </div>
+
+   
+    </>
   )
 }
 
