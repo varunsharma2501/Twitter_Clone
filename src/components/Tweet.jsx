@@ -3,33 +3,45 @@ import { useSelector } from 'react-redux';
 import Avatar from "react-avatar";
 import { FaRegComment } from "react-icons/fa";
 import { CiHeart, CiBookmark } from "react-icons/ci";
-import { MdDelete } from "react-icons/md";
+import { MdDelete, MdEdit } from "react-icons/md";
 import { Link } from 'react-router-dom';
 import useAddLike from '../hooks/useAddLike';
 import useAddBookmark from '../hooks/useAddBookmark';
 import useAddComment from '../hooks/useAddComment';
 import useDeleteTweet from '../hooks/useDeleteTweet';
+// import useUpdateTweet from '../hooks/useUpdateTweet';
+import useEditTweet from '../hooks/useEditTweet';
 
 function Tweet({ tweet, flagLike }) {
-  // console.log("inside tweet11",tweet.author._id);
   const addLike = useAddLike();
   const addBookmark = useAddBookmark();
   const addComment = useAddComment();
-  const deleteTweet=useDeleteTweet();
+  const deleteTweet = useDeleteTweet();
+  const editTweet = useEditTweet();
   const { user } = useSelector(store => store.user);
 
   const [isCommentModalVisible, setIsCommentModalVisible] = useState(false);
+  const [isEditModalVisible, setIsEditModalVisible] = useState(false);
   const [isLikeActive, setIsLikeActive] = useState(flagLike);
   const [isBookmarkActive, setIsBookmarkActive] = useState(false);
   const [comment, setComment] = useState('');
+  const [newDescription, setNewDescription] = useState(tweet.description);
 
   // Handlers to toggle the state
   const toggleCommentModal = () => {
     setIsCommentModalVisible(!isCommentModalVisible);
   };
 
+  const toggleEditModal = () => {
+    setIsEditModalVisible(!isEditModalVisible);
+  };
+
   const handleCommentChange = (e) => {
     setComment(e.target.value);
+  };
+
+  const handleDescriptionChange = (e) => {
+    setNewDescription(e.target.value);
   };
 
   const handleCommentSubmit = () => {
@@ -37,6 +49,13 @@ function Tweet({ tweet, flagLike }) {
       addComment(tweet._id, comment);
       setComment(''); // Clear the comment input after submitting
       setIsCommentModalVisible(false); // Close the modal after submitting
+    }
+  };
+
+  const handleEditSubmit = () => {
+    if (newDescription.trim()) {
+      editTweet(tweet._id, newDescription);
+      setIsEditModalVisible(false); // Close the modal after submitting
     }
   };
 
@@ -50,9 +69,9 @@ function Tweet({ tweet, flagLike }) {
     addBookmark(tweet._id);
   };
 
-  const deleteHandler=()=>{
+  const deleteHandler = () => {
     deleteTweet(tweet._id);
-  }
+  };
 
   return (
     <>
@@ -101,8 +120,13 @@ function Tweet({ tweet, flagLike }) {
                 </div>
                 {
                   user?._id === tweet.author._id && (
-                    <div onClick={deleteHandler} className='flex items-center hover:bg-red-300 rounded-full cursor-pointer'>
-                      <MdDelete />
+                    <div className='flex items-center'>
+                      <div onClick={deleteHandler} className='hover:bg-red-300 rounded-full cursor-pointer'>
+                        <MdDelete />
+                      </div>
+                      <div onClick={toggleEditModal} className='hover:bg-blue-300 rounded-full cursor-pointer ml-2'>
+                        <MdEdit />
+                      </div>
                     </div>
                   )
                 }
@@ -133,6 +157,35 @@ function Tweet({ tweet, flagLike }) {
               <button
                 className='bg-gray-500 text-white px-4 py-2 rounded-md ml-2'
                 onClick={toggleCommentModal}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {isEditModalVisible && (
+        <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-50'>
+          <div className='bg-white p-4 rounded-lg'>
+            <h2 className='text-xl mb-4'>Edit Tweet</h2>
+            <textarea
+              className='w-full p-2 border border-gray-300 rounded-md mb-4'
+              rows="4"
+              placeholder="Edit your tweet here..."
+              value={newDescription}
+              onChange={handleDescriptionChange}
+            ></textarea>
+            <div className='flex justify-end'>
+              <button
+                className='bg-blue-500 text-white px-4 py-2 rounded-md'
+                onClick={handleEditSubmit}
+              >
+                Save
+              </button>
+              <button
+                className='bg-gray-500 text-white px-4 py-2 rounded-md ml-2'
+                onClick={toggleEditModal}
               >
                 Cancel
               </button>
