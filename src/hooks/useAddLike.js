@@ -2,7 +2,7 @@ import axios from "axios";
 import { TWEET_API_END_POINT } from "../utils/const";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
-import { getRefresh } from "../redux/tweetSlice";
+// import { getRefresh } from "../redux/tweetSlice";
 
 const useAddLike = async (id) => {
     const dispatch=useDispatch();
@@ -12,7 +12,7 @@ const useAddLike = async (id) => {
       withCredentials: true
     });
     console.log("addLike 2");
-    dispatch(getRefresh());
+    // dispatch(getRefresh());
     toast.success(res.data.message);
   } catch (error) {
     toast.error("Failed to follow user: " + error.message);

@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 
 const useGetFollowingTweets = (id) => {
     const dispatch = useDispatch();
-    const {refresh}=useSelector(store=>store.tweet);
+    // const {refresh}=useSelector(store=>store.tweet);
     useEffect(()=>{
         const FollowingTweets = async () => {
             try {
@@ -25,7 +25,7 @@ const useGetFollowingTweets = (id) => {
             }
         }
         FollowingTweets();
-    },[refresh]);
+    },[]);
 };
 
 export default useGetFollowingTweets;

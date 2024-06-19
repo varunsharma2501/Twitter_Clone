@@ -1,11 +1,12 @@
 import axios from "axios";
 import { USER_API_END_POINT } from "../utils/const";
 import { useEffect } from "react";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import { getOtherUsers } from "../redux/userSlice";
 import toast from "react-hot-toast";
 
 const useOtherUsers = () => {
+    // const {refreshUser}=useSelector(store=>store.user);
     const dispatch = useDispatch();
     useEffect(()=>{
         const fetchOtherUsers = async () => {

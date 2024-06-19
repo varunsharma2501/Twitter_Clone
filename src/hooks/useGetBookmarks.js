@@ -21,7 +21,7 @@ const useGetBookmarks = () => {
             }
         }
         fetchBookmarks();
-    },[refresh]);
+    },[]);
 };
 
 export default useGetBookmarks;

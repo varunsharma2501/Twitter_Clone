@@ -5,7 +5,7 @@ import store from '../redux/store';
 
 function AllTweets() {
     const {allTweets} = useSelector((store) => store.tweet);
-    console.log("Alltweets1");
+    // console.log("Alltweets1");
   return (
     <div>
        {allTweets && allTweets.map((tweet) => (

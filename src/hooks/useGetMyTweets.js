@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 
 const useGetMyTweets = () => {
     const dispatch = useDispatch();
-    const refresh=useSelector(store=>store.tweet);
+    // const refresh=useSelector(store=>store.tweet);
     useEffect(()=>{
         const MyTweets = async () => {
             try {
@@ -24,7 +24,7 @@ const useGetMyTweets = () => {
             }
         }
         MyTweets();
-    },[refresh]);
+    },[]);
 };
 
 export default useGetMyTweets;

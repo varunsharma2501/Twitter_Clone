@@ -9,7 +9,8 @@ const userSlice = createSlice({
         following: [],
         followers: [],
         likes:[],
-        bookmarks:[]
+        bookmarks:[],
+        refreshUser:false,
     },
     reducers: {
         getUser: (state, action) => {
@@ -32,8 +33,10 @@ const userSlice = createSlice({
         },
         getBookmarks:(state,action)=>{
             state.bookmarks=action.payload;
-        }
-
+        },
+        getRefreshUser:(state)=>{
+            state.refreshUser=!state.refreshUser
+        },
     }
 });
 
@@ -44,7 +47,8 @@ export const {
     getFollowers,
     getFollowing ,
     getLikes,
-    getBookmarks // <- Corrected export name here
+    getBookmarks,
+    getRefreshUser // <- Corrected export name here
 } = userSlice.actions;
 
 export default userSlice.reducer;

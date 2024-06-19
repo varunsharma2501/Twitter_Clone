@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 
 const useGetLikes = () => {
     const dispatch = useDispatch();
-    const refresh=useSelector(store=>store.tweet)
+    // const refresh=useSelector(store=>store.tweet)
     useEffect(()=>{
         const fetchLikes = async () => {
             try {
@@ -21,7 +21,7 @@ const useGetLikes = () => {
             }
         }
         fetchLikes();
-    },[refresh]);
+    },[]);
 };
 
 export default useGetLikes;

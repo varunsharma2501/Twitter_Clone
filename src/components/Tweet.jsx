@@ -8,8 +8,8 @@ import { Link } from 'react-router-dom';
 // import { useState } from "react";
 
 function Tweet({tweet}) {
-  console.log("tweet");
-  console.log("author is ",tweet?.author?._id);
+  console.log("tweet.jsx");
+  // console.log("author is ",tweet?.author?._id);
   const [isCommentModalVisible, setIsCommentModalVisible] = useState(false);
   const [isLikeActive, setIsLikeActive] = useState(false);
   const [isBookmarkActive, setIsBookmarkActive] = useState(false);

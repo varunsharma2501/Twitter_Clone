@@ -15,7 +15,7 @@ const useCreateTweet = () => {
         data: { description },
         withCredentials: true
       });
-      dispatch(getRefresh());
+      // dispatch(getRefresh());
       console.log("tweet2");
       toast.success("Tweet created successfully");
     } catch (error) {
