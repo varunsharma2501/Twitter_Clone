@@ -1,29 +1,29 @@
 import axios from "axios";
-import { TWEET_API_END_POINT } from "../utils/const";
+import { USER_API_END_POINT } from "../utils/const";
 import { useEffect } from "react";
 import {useDispatch} from "react-redux";
-import { getAllTweets } from "../redux/tweetSlice";
+import { getFollowers} from "../redux/userSlice";
 import toast from "react-hot-toast";
 
-const useGetOtherTweets = (id) => {
+const useGetFollowers = () => {
     const dispatch = useDispatch();
     useEffect(()=>{
-        const getOtherTweets = async () => {
+        const fetchFollowers = async () => {
             try {
-                // console.log("inside UseGetTweet1");
-                const res = await axios.get(`${TWEET_API_END_POINT}/all`,{
+                console.log("inside getFollowers1");
+                const res = await axios.get(`${USER_API_END_POINT}/getFollowers`,{
                     withCredentials:true
                 });
+                console.log("Followers are ",res.data.followers);
                 // console.log("other users are ", res.data.otherUsers); // Correct property access
-                // console.log("Other tweets are",res.data.tweets);
-                dispatch(getAllTweets(res.data.tweets)); // Correct property access
+                dispatch(getFollowers(res.data.followers)); // Correct property access
             } catch (error) {
                 // console.log(error);
                 toast.error(error.message);
             }
         }
-        getOtherTweets();
+        fetchFollowers();
     },[]);
 };
 
-export default useGetOtherTweets;
+export default useGetFollowers;

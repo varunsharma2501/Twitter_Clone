@@ -30,9 +30,10 @@ const useLogin = () =>
 			// 	throw new Error(data.error);
 			// }
 
-        dispatch(getUser(res?.data?.user));
+        // dispatch(getUser(res?.data?.user));
         if (res.status === 200) {
-          dispatch(getUser(res?.data?.user));
+          console.log("useLogin",res.data.user);
+          dispatch(getUser(res.data.user));
           navigate("/");
           toast.success("Login successful");
         } else {

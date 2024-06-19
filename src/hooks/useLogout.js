@@ -1,8 +1,10 @@
 import axios from 'axios';
 import { AUTH_API_END_POINT } from '../utils/const';
-import { getUser } from "../redux/userSlice";
+import { getMyProfile, getOtherUsers, getUser } from "../redux/userSlice";
 import { useDispatch } from 'react-redux';
 import toast from "react-hot-toast";
+import { getProfile } from '../../../backend/controllers/userController';
+import { getAllTweets, getFollowingTweets, getMyTweets } from '../redux/tweetSlice';
 
 const useLogout = () => {
     const dispatch = useDispatch();
@@ -26,6 +28,11 @@ const useLogout = () => {
             // Assuming the backend sends a success message in the 'message' field
             if (response.data.message === "Logged out successfully") {
                 dispatch(getUser(null));
+                dispatch(getOtherUsers([]));
+                dispatch(getMyProfile(null));
+                dispatch(getFollowingTweets([]));
+                dispatch(getAllTweets([]));
+                dispatch(getMyTweets([]));
                 toast.success("Logged out successfully");
             } else {
                 throw new Error("Logout failed");

@@ -2,30 +2,29 @@ import axios from "axios";
 import { TWEET_API_END_POINT } from "../utils/const";
 import { useEffect } from "react";
 import {useDispatch, useSelector} from "react-redux";
-import { getFollowingTweets } from "../redux/tweetSlice";
+import { getMyTweets } from "../redux/tweetSlice";
 import toast from "react-hot-toast";
 
-
-const useGetFollowingTweets = (id) => {
+const useGetMyTweets = () => {
     const dispatch = useDispatch();
-    const {refresh}=useSelector(store=>store.tweet);
+    const refresh=useSelector(store=>store.tweet);
     useEffect(()=>{
-        const FollowingTweets = async () => {
+        const MyTweets = async () => {
             try {
                 // console.log("inside UseGetTweet1");
-                const res = await axios.get(`${TWEET_API_END_POINT}/followingTweets`,{
+                const res = await axios.get(`${TWEET_API_END_POINT}/myTweets`,{
                     withCredentials:true
                 });
                 // console.log("other users are ", res.data.otherUsers); // Correct property access
                 // console.log("Other tweets are",res.data.tweets);
-                dispatch(getFollowingTweets(res.data.tweets)); // Correct property access
+                dispatch(getMyTweets(res.data.tweets)); // Correct property access
             } catch (error) {
                 // console.log(error);
                 toast.error(error.message);
             }
         }
-        FollowingTweets();
+        MyTweets();
     },[refresh]);
 };
 
-export default useGetFollowingTweets;
+export default useGetMyTweets;

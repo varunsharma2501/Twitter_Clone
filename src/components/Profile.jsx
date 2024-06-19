@@ -11,7 +11,7 @@ function Profile() {
     const {id}=useParams();
     useGetProfile(id);
     useGetMyTweets();
-    console.log("getProfile ",id);
+    // console.log("getProfile ",id);
     const {profile}=useSelector(store=>store.user);
     const {myTweets}=useSelector(store=>store.tweet);
     // const dispatch = useDispatch();
@@ -49,7 +49,20 @@ function Profile() {
         </div>
     </div>
 
+    <div className='flex items-center justify-evenly border-b border-gray-200'>
+                    <Link to="/followers">
+                    <div className='cursor-pointer hover:bg-gray-200 w-full text-center px-4 py-3'>
+                        <h1 className='font-semibold text-gray-600 text-lg'>Followers</h1>
+                    </div>
+                    </Link>
+                    <Link to="/following">
+                    <div className='cursor-pointer hover:bg-gray-200 w-full text-center px-4 py-3'>
+                        <h1 className='font-semibold text-gray-600 text-lg'>Following</h1>
+                    </div>
+                    </Link>
+                </div>
     <div>
+
        {myTweets && myTweets.map((tweet) => (
             <Tweet key={tweet._id} tweet={tweet} />
         ))}

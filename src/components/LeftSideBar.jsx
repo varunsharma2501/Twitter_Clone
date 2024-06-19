@@ -8,9 +8,11 @@ import { AiOutlineLogout } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import useLogout from "../hooks/useLogout";
+import store from "../redux/store";
 
 function LeftSideBar() {
-  const user = useSelector(state => state.user.user);
+  const {user} = useSelector(store=>store.user);
+  // console.log("leftSidebar",user);
   const handleLogout=useLogout();
   return (
     <div className="w-[20%]">
@@ -30,7 +32,7 @@ function LeftSideBar() {
         <div className="my-4">
           
           <div className="flex items-center my-2 px-4 py-2 hover:bg-gray-200 hover:cursor-pointer rounded-full">
-            <Link to="/" className="flex items-center">
+            <Link to="/allTweets" className="flex items-center">
             <div>
               <CiHome size="24px" />
             </div>
@@ -38,12 +40,14 @@ function LeftSideBar() {
             </Link>
           </div>
 
+          <Link to="/allTweets">          
           <div className="flex items-center my-2 px-4 py-2 hover:bg-gray-200 hover:cursor-pointer rounded-full">
             <div>
             <CiHashtag size="24px" />
             </div>
             <h1 className="font-bold text-lg ml-2">Explore</h1>
           </div>
+          </Link>
 
           <div className="flex items-center my-2 px-4 py-2 hover:bg-gray-200 hover:cursor-pointer rounded-full">
             <div>

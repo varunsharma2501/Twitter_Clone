@@ -5,9 +5,8 @@ import { useSelector } from "react-redux";
 import UserCard from "./UserCard";
 
 function RightSideBar() {
-  // const [id, setId] = useState(null); // State to store user ID for follow action
   const { otherUsers } = useSelector((store) => store.user);
-  console.log("otherUsers:", otherUsers);
+  // console.log("otherUsers:", otherUsers);
 
   // Function to handle follow action for a specific user
 
@@ -33,7 +32,7 @@ function RightSideBar() {
             <p>No More Users</p>
           ) : (
             otherUsers.map((user) => (
-              <UserCard key={user._id} user={user} />
+              <UserCard key={user._id} user={user} flag={false} />
             ))
           )}
         </div>

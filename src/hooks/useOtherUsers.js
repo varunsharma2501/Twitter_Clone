@@ -5,7 +5,7 @@ import {useDispatch} from "react-redux";
 import { getOtherUsers } from "../redux/userSlice";
 import toast from "react-hot-toast";
 
-const useOtherUsers = (id) => {
+const useOtherUsers = () => {
     const dispatch = useDispatch();
     useEffect(()=>{
         const fetchOtherUsers = async () => {
@@ -14,7 +14,7 @@ const useOtherUsers = (id) => {
                 const res = await axios.get(`${USER_API_END_POINT}/getUsers`,{
                     withCredentials:true
                 });
-                // console.log("other users are ", res.data.otherUsers); // Correct property access
+                console.log("other users are ", res.data.otherUsers); // Correct property access
                 dispatch(getOtherUsers(res.data.otherUsers)); // Correct property access
             } catch (error) {
                 // console.log(error);
@@ -22,7 +22,7 @@ const useOtherUsers = (id) => {
             }
         }
         fetchOtherUsers();
-    },[id]);
+    },[]);
 };
 
 export default useOtherUsers;
