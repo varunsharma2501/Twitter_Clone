@@ -2,7 +2,7 @@ import axios from "axios";
 import { TWEET_API_END_POINT } from "../utils/const";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
-import { getRefresh } from "../redux/tweetSlice";
+import { getRefreshTweet } from "../redux/tweetSlice";
 const useCreateTweet = () => {
   const dispatch=useDispatch();
   const createTweet = async (description) => {
@@ -15,7 +15,8 @@ const useCreateTweet = () => {
         data: { description },
         withCredentials: true
       });
-      // dispatch(getRefresh());
+      console.log("Sent the refresh tweet in useCreatetweet");
+      dispatch(getRefreshTweet());
       console.log("tweet2");
       toast.success("Tweet created successfully");
     } catch (error) {

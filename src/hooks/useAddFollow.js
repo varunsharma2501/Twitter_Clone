@@ -2,7 +2,6 @@ import axios from "axios";
 import { USER_API_END_POINT } from "../utils/const";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
-// import { getRefresh } from "../redux/tweetSlice";
 import { getRefreshUser } from "../redux/userSlice";
 
 const useAddFollow = () => {
@@ -15,7 +14,7 @@ const useAddFollow = () => {
         withCredentials: true
       });
       console.log("addFollow 2");
-      // dispatch(getRefreshUser());
+      dispatch(getRefreshUser());
       toast.success(res.data.message);
     } catch (error) {
       toast.error("Failed to follow user: " + error.message);

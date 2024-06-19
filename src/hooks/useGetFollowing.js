@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 
 const useGetFollowing = () => {
     const dispatch = useDispatch();
-    // const {refreshUser}=useSelector(store=>store.user);
+    const {refreshUser}=useSelector(store=>store.user);
     useEffect(()=>{
         const fetchFollowing = async () => {
             try {
@@ -24,7 +24,7 @@ const useGetFollowing = () => {
             }
         }
         fetchFollowing();
-    },[]);
+    },[refreshUser]);
 };
 
 export default useGetFollowing;

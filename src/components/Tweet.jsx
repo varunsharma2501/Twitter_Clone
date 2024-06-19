@@ -5,18 +5,23 @@ import { FaRegComment } from "react-icons/fa";
 import { CiHeart } from "react-icons/ci";
 import { CiBookmark } from "react-icons/ci";
 import { Link } from 'react-router-dom';
+import useAddLike from '../hooks/useAddLike';
 // import { useState } from "react";
 
-function Tweet({tweet}) {
+function Tweet({tweet,flagLike}) {
+  const addLike=useAddLike();
   console.log("tweet.jsx");
   // console.log("author is ",tweet?.author?._id);
   const [isCommentModalVisible, setIsCommentModalVisible] = useState(false);
-  const [isLikeActive, setIsLikeActive] = useState(false);
+  const [isLikeActive, setIsLikeActive] = useState(flagLike);
   const [isBookmarkActive, setIsBookmarkActive] = useState(false);
 
   // Handlers to toggle the state
   const toggleCommentModal = () => setIsCommentModalVisible(!isCommentModalVisible);
-  const toggleLike = () => setIsLikeActive(!isLikeActive);
+  const toggleLike = () => {
+    setIsLikeActive(!isLikeActive);
+    addLike(tweet._id);
+  }
   const toggleBookmark = () => setIsBookmarkActive(!isBookmarkActive);
 
 

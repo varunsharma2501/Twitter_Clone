@@ -8,7 +8,7 @@ import store from "../redux/store";
 
 const useGetAllTweets = (id) => {
     const dispatch = useDispatch();
-    // const {refresh}=useSelector(store=>store.tweet);
+    const {refreshTweet}=useSelector(store=>store.tweet);
     useEffect(()=>{
         const AllTweets = async () => {
             try {
@@ -25,7 +25,7 @@ const useGetAllTweets = (id) => {
             }
         }
         AllTweets();
-    },[]);
+    },[refreshTweet]);
 };
 
 export default useGetAllTweets;

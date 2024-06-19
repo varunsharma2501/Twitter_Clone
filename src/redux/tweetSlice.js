@@ -6,7 +6,7 @@ const tweetSlice=createSlice({
        myTweets:[],
        followingTweets:[],
        allTweets:[],
-       refresh:false,
+       refreshTweet:false,
     //    likes:[],
     //    comments:[],
     //    bookmarks:[]
@@ -21,8 +21,8 @@ const tweetSlice=createSlice({
         getFollowingTweets:(state,action)=>{
             state.followingTweets = action.payload;
         },
-        getRefresh:(state)=>{
-            state.refresh=!state.refresh;
+        getRefreshTweet:(state)=>{
+            state.refreshTweet=!state.refreshTweet;
         }
         // getLikes:(state,action)=>{
         //     state.likes=action.payload;
@@ -36,5 +36,5 @@ const tweetSlice=createSlice({
     }
 })
 
-export const {getAllTweets,getMyTweets,getFollowingTweets,getRefresh}=tweetSlice.actions;
+export const {getAllTweets,getMyTweets,getFollowingTweets,getRefreshTweet}=tweetSlice.actions;
 export default tweetSlice.reducer;

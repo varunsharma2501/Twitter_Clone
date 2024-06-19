@@ -6,12 +6,12 @@ import { getOtherUsers } from "../redux/userSlice";
 import toast from "react-hot-toast";
 
 const useOtherUsers = () => {
-    // const {refreshUser}=useSelector(store=>store.user);
+    const {refreshUser}=useSelector(store=>store.user);
     const dispatch = useDispatch();
     useEffect(()=>{
         const fetchOtherUsers = async () => {
             try {
-                // console.log("inside otherUsers1");
+                console.log("inside otherUsers1");
                 const res = await axios.get(`${USER_API_END_POINT}/getUsers`,{
                     withCredentials:true
                 });
@@ -23,7 +23,7 @@ const useOtherUsers = () => {
             }
         }
         fetchOtherUsers();
-    },[]);
+    },[refreshUser]);
 };
 
 export default useOtherUsers;
