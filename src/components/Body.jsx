@@ -10,6 +10,7 @@ import FollowingTweets from './FollowingTweets';
 import AllTweets from './AllTweets';
 import Following from './Following';
 import Followers from './Followers';
+import BookmarkTweets from './BookmarkTweets';
 
 const Body = () => {
     const appRouter = createBrowserRouter([
@@ -36,6 +37,10 @@ const Body = () => {
                                 {
                                     path:"/allTweets",
                                     element:<AllTweets/>
+                                },
+                                {
+                                    path:"/bookmarkedTweets",
+                                    element:<BookmarkTweets/>
                                 }
                             ]
                         },

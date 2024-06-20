@@ -66,10 +66,12 @@ function LeftSideBar() {
           </div>
 
           <div className='flex items-center my-2 px-4 py-2 hover:bg-gray-200 hover:cursor-pointer rounded-full'>
+            <Link to={`/bookmarkedTweets`} className="flex items-center">
                         <div>
                             <CiBookmark size="24px" />
                         </div>
                         <h1 className='font-bold text-lg ml-2'>Bookmarks</h1>
+            </Link>
           </div>
 
           <div className="flex items-center my-2 px-4 py-2 hover:bg-gray-200 hover:cursor-pointer rounded-full" onClick={handleLogout}>
